@@ -15,8 +15,8 @@
   </style>
 </head>
 <body>
-  <h1>Challenge 1 - Odds in Your Favor</h1>
-  <p><b>Use code blocks to print (on the screen, not on paper) the odd numbers between 1 and 30.</b></p>
+  <h1>Challenge 2 - Perfectly Square</h1>
+  <p><b>Use code blocks to output ("print") the <a href="https://simple.wikipedia.org/wiki/Square_number" target="_blank">perfect squares</a> up to 100.</b></p>
   <p>Drag blocks from the left, then click the "Run Code" button to see the output.</p>
     <div>
       <button onclick="clearOutput()">Clear Output</button>
@@ -27,17 +27,14 @@
 
   <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display:none">
     <block type="controls_repeat_ext"></block>
-    <block type="controls_for">
-      <value name="FROM"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
-      <value name="TO"><shadow type="math_number"><field name="NUM">10</field></shadow></value>
-      <value name="BY"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
-    </block>
-    <block type="controls_if"></block>
-    <block type="variables_get"><field name="VAR" class="textVar">i</field></block>
-    <block type="logic_compare"></block>
+    <block type="variables_set"><field name="VAR" class="textVar">n</field></block>
+    <block type="math_change"><field name="VAR" class="textVar">n</field></block>
+    <block type="variables_get"><field name="VAR" class="textVar">n</field></block>
     <block type="math_arithmetic"></block>
-    <block type="math_number"><field name="NUM">27</field></block>
+    <block type="math_number"><field name="NUM">10</field></block>
     <block type="text_print"></block>
+    <block type="controls_if"></block>
+    <block type="logic_compare"></block>
   </xml>
 
   <xml xmlns="https://developers.google.com/blockly/xml" id="startBlocks" style="display: none">
