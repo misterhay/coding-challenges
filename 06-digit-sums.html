@@ -21,13 +21,12 @@
   <p>Finding the <a href="https://en.wikipedia.org/wiki/Digit_sum">digit sum</a> of a number means adding the values of all of its digits. For example, the digit sum of <b>123</b> is <b>1 + 2 + 3 = 6</b>.</p>
   <p>A mathematical algorithm for calculating a digit sum is:
     <ol>
-      <li>Prompt the user to enter a <i>number</i>.
-        <ul><li>The code for this is already added.</li></ul>
-      </li>
-      <li>Add the last digit to the sum.
+      <li>Add the last digit of <i>the number</i> to <i>the sum</i>.
         <ul><li>Set <i>the sum</i> equal to <i>the sum</i> plus the remainder of <i>the number</i> divided by 10.</li></ul>
       </li>
-      <li>Divide <i>the number</i> by 10, rounding down.</li>
+      <li>Remove the last digit of <i>the number</i>.
+        <ul><li>Divide <i>the number</i> by 10, rounding down.</li></ul>
+      </li>
       <li>Repeat the previous two steps while <i>the number</i> is greater than zero.</li>
       <li>Print <i>the sum.</i></li>
     </ol>
@@ -38,19 +37,16 @@
       <button onclick="runCode()">Run Code</button>
     </div>
 
-  <div id="blocklyDiv" style="height: 670px; width: 100%;"></div>
+  <div id="blocklyDiv" style="height: 570px; width: 100%;"></div>
 
   <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display:none">
     <block type="variables_set"><field name="VAR" class="textVar">n</field></block>
-    <block type="text_prompt_ext"><value name="NUMBERprompt"><shadow type="text"><field name="TEXT">n =</field></shadow></value></block>
-    <shadow type="text"><field name="TEXT">n =</field></shadow>
-    <block type="text"></block>
     <block type="variables_get"><field name="VAR" class="textVar">n</field></block>
     <block type="variables_get"><field name="VAR" class="textVar">sum</field></block>
-
+    <block type="math_number"><field name="NUM">0</field></block>
     <block type="math_arithmetic"><value name="A"><shadow type="math_number"><field name="NUM">1</field></shadow></value><value name="B"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block>
     <block type="math_modulo"><value name="DIVIDEND"><shadow type="math_number"><field name="NUM">1</field></shadow></value><value name="DIVISOR"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block>
-    <block type="math_round"><value name="NUM"><shadow type="math_number"><field name="NUM">1.6</field></shadow></value></block>
+    <block type="math_round"><field name="OP">ROUNDDOWN</field><value name="NUM"><shadow type="math_number"><field name="NUM">1.6</field></shadow></value></block>
     <block type="controls_whileUntil"></block>
     <block type="logic_compare"></block>
     <block type="text_print"></block>
