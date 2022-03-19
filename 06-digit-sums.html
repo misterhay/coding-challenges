@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script src="https://blockly-demo.appspot.com/static/blockly_compressed.js"></script>
+  <script src="https://blockly-demo.appspot.com/static/blocks_compressed.js"></script>
+  <script src="https://blockly-demo.appspot.com/static/python_compressed.js"></script>
+  <script src="https://blockly-demo.appspot.com/static/javascript_compressed.js"></script>
+  <script src="https://blockly-demo.appspot.com/static/msg/js/en.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34211446-1"></script>
+  <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-34211446-1');</script>
+  <style>
+    body {
+      background-color: #fff;
+      font-family: sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <h1>Challenge 6 - Digit Sums</h1>
+  <p>Finding the <a href="https://en.wikipedia.org/wiki/Digit_sum">digit sum</a> of a number means adding the values of all of its digits. For example, the digit sum of <b>123</b> is <b>1 + 2 + 3 = 6</b>.</p>
+  <p>A mathematical algorithm for calculating a digit sum is:
+    <ol>
+      <li>Prompt the user to enter a <i>number</i></li>
+      <li>Add the last digit to the sum
+        <ul><li>set <i>the sum</i> equal to <i>the sum</i> plus the remainder of <i>the number</i> divided by 10</li></ul>
+      </li>
+      <li>Divide <i>the number</i> by 10, rounding down</li>
+      <li>Repeat the steps while <i>the number</i> is greater than zero</li>
+      <li>Print <i>the sum</i></li>
+    </ol>
+  </p>
+  <p><b>Drag blocks from the left, then click the "Run Code" button to see the output.</p>
+    <div>
+      <button onclick="clearOutput()">Clear Output</button>
+      <button onclick="runCode()">Run Code</button>
+    </div>
+
+  <div id="blocklyDiv" style="height: 670px; width: 100%;"></div>
+
+  <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display:none">
+    <block type="variables_set"><field name="VARn" class="textVar">n</field></block>
+    <block type="text_prompt_ext"><value name="NUMBERprompt"><shadow type="text"><field name="TEXT">n =</field></shadow></value></block>
+    <shadow type="text"><field name="TEXT">n =</field></shadow>
+    <block type="text"></block>
+    <block type="variables_get"><field name="VAR" class="textVar">n</field></block>
+    <block type="variables_get"><field name="VAR" class="textVar">sum</field></block>
+
+    <block type="math_arithmetic"><value name="A"><shadow type="math_number"><field name="NUM">1</field></shadow></value><value name="B"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block>
+    <block type="math_modulo"><value name="DIVIDEND"><shadow type="math_number"><field name="NUM">1</field></shadow></value><value name="DIVISOR"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block>
+    <block type="math_round"><value name="NUM"><shadow type="math_number"><field name="NUM">1.6</field></shadow></value></block>
+    <block type="controls_whileUntil"></block>
+    <block type="logic_compare"></block>
+    <block type="text_print"></block>
+  </xml>
+
+  <xml xmlns="https://developers.google.com/blockly/xml" id="startBlocks" style="display: none">
+
+  </xml>
+
+  <table style="width:100%">
+    <tr>
+      <th style="width:50%">Output</th><th style="width:50%">Python Code</th>
+    </tr>
+    <tr>
+      <td style="vertical-align:top"><div id='remappedOutput'></div></td>
+      <td style="vertical-align:top"><pre id='codeDisplay'></pre></td>
+    </tr>
+  </table>
+
+<script>
+    function remapAlert(messageString) {
+      var previousOutput = document.getElementById('remappedOutput').innerText;
+      document.getElementById('remappedOutput').innerText = previousOutput + '\n' + messageString;
+    }
+    window.alert = remapAlert; // because window.alert won't work in an iframe
+
+    function clearOutput() {
+      document.getElementById('remappedOutput').innerText = '';
+    }
+
+    var workspace = Blockly.inject('blocklyDiv', {media: 'https://unpkg.com/blockly/media/', toolbox: document.getElementById('toolbox')});
+    Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),workspace);
+
+    function showCode() {
+      Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+      var code = Blockly.Python.workspaceToCode(workspace);
+      document.getElementById('codeDisplay').innerText = code;
+    }
+
+    function runCode() {
+      window.LoopTrap = 1000;
+      Blockly.JavaScript.INFINITE_LOOP_TRAP = 'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
+      var code = Blockly.JavaScript.workspaceToCode(workspace);
+      Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+      try {
+        eval(code);
+      } catch(e) {
+        alert(e);
+      }
+    }
+
+    workspace.addChangeListener(showCode);
+  </script>
+
+</body>
+</html>
