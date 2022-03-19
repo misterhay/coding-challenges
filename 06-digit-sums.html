@@ -21,13 +21,15 @@
   <p>Finding the <a href="https://en.wikipedia.org/wiki/Digit_sum">digit sum</a> of a number means adding the values of all of its digits. For example, the digit sum of <b>123</b> is <b>1 + 2 + 3 = 6</b>.</p>
   <p>A mathematical algorithm for calculating a digit sum is:
     <ol>
-      <li>Prompt the user to enter a <i>number</i></li>
-      <li>Add the last digit to the sum
-        <ul><li>set <i>the sum</i> equal to <i>the sum</i> plus the remainder of <i>the number</i> divided by 10</li></ul>
+      <li>Prompt the user to enter a <i>number</i>.
+        <ul><li>The code for this is already added.</li></ul>
       </li>
-      <li>Divide <i>the number</i> by 10, rounding down</li>
-      <li>Repeat the steps while <i>the number</i> is greater than zero</li>
-      <li>Print <i>the sum</i></li>
+      <li>Add the last digit to the sum.
+        <ul><li>Set <i>the sum</i> equal to <i>the sum</i> plus the remainder of <i>the number</i> divided by 10.</li></ul>
+      </li>
+      <li>Divide <i>the number</i> by 10, rounding down.</li>
+      <li>Repeat the previous two steps while <i>the number</i> is greater than zero.</li>
+      <li>Print <i>the sum.</i></li>
     </ol>
   </p>
   <p><b>Drag blocks from the left, then click the "Run Code" button to see the output.</p>
@@ -39,7 +41,7 @@
   <div id="blocklyDiv" style="height: 670px; width: 100%;"></div>
 
   <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display:none">
-    <block type="variables_set"><field name="VARn" class="textVar">n</field></block>
+    <block type="variables_set"><field name="VAR" class="textVar">n</field></block>
     <block type="text_prompt_ext"><value name="NUMBERprompt"><shadow type="text"><field name="TEXT">n =</field></shadow></value></block>
     <shadow type="text"><field name="TEXT">n =</field></shadow>
     <block type="text"></block>
@@ -55,7 +57,34 @@
   </xml>
 
   <xml xmlns="https://developers.google.com/blockly/xml" id="startBlocks" style="display: none">
-
+    <<block type="variables_set" id="asdf" x="13" y="13">
+      <field name="VAR" id="qwer">n</field>
+      <value name="VALUE">
+        <block type="text_prompt_ext" id="zxcv">
+          <mutation type="NUMBER"></mutation>
+          <field name="TYPE">NUMBER</field>
+          <value name="TEXT">
+            <shadow type="text" id="lkjh">
+              <field name="TEXT">abc</field>
+            </shadow>
+            <block type="text" id="oiuy">
+              <field name="TEXT">number =</field>
+            </block>
+          </value>
+        </block>
+      </value>
+    
+    <next>
+      <block type="variables_set" id="sdfg">
+        <field name="VAR" id="wert">sum</field>
+        <value name="VALUE">
+          <block type="math_number" id="xcvb">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+    </next>
+  </block>
   </xml>
 
   <table style="width:100%">
