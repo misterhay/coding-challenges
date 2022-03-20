@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script src="https://blockly-demo.appspot.com/static/blockly_compressed.js"></script>
+  <script src="https://blockly-demo.appspot.com/static/blocks_compressed.js"></script>
+  <script src="https://blockly-demo.appspot.com/static/python_compressed.js"></script>
+  <script src="https://blockly-demo.appspot.com/static/javascript_compressed.js"></script>
+  <script src="https://blockly-demo.appspot.com/static/msg/js/en.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34211446-1"></script>
+  <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-34211446-1');</script>
+  <style>
+    body {
+      background-color: #fff;
+      font-family: sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <h1>Challenge 7 - Seconds to Minutes</h1>
+  <p>Create an algorithm that converts a given number of seconds into minutes. Remember that there are 60 seconds in a minute, so an input of <b>125</b> seconds should output <b>2 minutes and 5 seconds</b>.</p>
+  <p><b>Drag blocks from the left, then click the "Run Code" button to see the output.</p>
+    <div>
+      <button onclick="clearOutput()">Clear Output</button>
+      <button onclick="runCode()">Run Code</button>
+    </div>
+
+  <div id="blocklyDiv" style="height: 460px; width: 100%;"></div>
+
+  <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display:none">
+    <block type="variables_get"><field name="VAR" class="textVar">seconds</field></block>
+    <block type="math_arithmetic"><field name="OP">DIVIDE</field><value name="A"><shadow type="math_number"><field name="NUM">1</field></shadow></value><value name="B"><shadow type="math_number"><field name="NUM">60</field></shadow></value></block>
+    <block type="math_modulo"><value name="DIVIDEND"><shadow type="math_number"><field name="NUM">1</field></shadow></value><value name="DIVISOR"><shadow type="math_number"><field name="NUM">60</field></shadow></value></block>
+    <block type="math_round"><field name="OP">ROUNDDOWN</field><value name="NUM"><shadow type="math_number"><field name="NUM">1.6</field></shadow></value></block>
+    <block type="text"><field name="TEXT"></field></block>
+    <block type="text_join"><mutation items="4"></mutation></block>
+    <block type="text_print"></block>
+  </xml>
+
+  <xml xmlns="https://developers.google.com/blockly/xml" id="startBlocks" style="display: none">
+    <<block type="variables_set" id="asdf" x="13" y="13">
+      <field name="VAR" id="qwer">seconds</field>
+      <value name="VALUE">
+        <block type="text_prompt_ext" id="zxcv">
+          <mutation type="NUMBER"></mutation>
+          <field name="TYPE">NUMBER</field>
+          <value name="TEXT">
+            <block type="text" id="oiuy">
+              <field name="TEXT">How many seconds?</field>
+            </block>
+          </value>
+        </block>
+      </value>
+  </block>
+  </xml>
+
+  <table style="width:100%">
+    <tr>
+      <th style="width:50%">Output</th><th style="width:50%">Python Code</th>
+    </tr>
+    <tr>
+      <td style="vertical-align:top"><div id='remappedOutput'></div></td>
+      <td style="vertical-align:top"><pre id='codeDisplay'></pre></td>
+    </tr>
+  </table>
+
+<script>
+    function remapAlert(messageString) {
+      var previousOutput = document.getElementById('remappedOutput').innerText;
+      document.getElementById('remappedOutput').innerText = previousOutput + '\n' + messageString;
+    }
+    window.alert = remapAlert; // because window.alert won't work in an iframe
+
+    function clearOutput() {
+      document.getElementById('remappedOutput').innerText = '';
+    }
+
+    var workspace = Blockly.inject('blocklyDiv', {media: 'https://unpkg.com/blockly/media/', toolbox: document.getElementById('toolbox')});
+    Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),workspace);
+
+    function showCode() {
+      Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+      var code = Blockly.Python.workspaceToCode(workspace);
+      document.getElementById('codeDisplay').innerText = code;
+    }
+
+    function runCode() {
+      window.LoopTrap = 1000;
+      Blockly.JavaScript.INFINITE_LOOP_TRAP = 'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
+      var code = Blockly.JavaScript.workspaceToCode(workspace);
+      Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+      try {
+        eval(code);
+      } catch(e) {
+        alert(e);
+      }
+    }
+
+    workspace.addChangeListener(showCode);
+  </script>
+<a href="index.html">Home</a>
+</body>
+</html>
